@@ -13,6 +13,6 @@ export const useContactStore = create<ContactState>((set) => ({
   load: async () => set({ contacts: await invokeIPC<Contact[]>('contacts:list') }),
   save: async (contact) => {
     await invokeIPC<Contact>('contacts:save', contact);
-    set((state) => ({ contacts: state.contacts.filter((item) => item.id === contact.id).concat(contact) }));
+    set((state) => ({ contacts: state.contacts.filter((item) => item.id !== contact.id).concat(contact) }));
   }
 }));
